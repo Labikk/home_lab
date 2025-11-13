@@ -1,0 +1,82 @@
+services:
+  broker:
+    image: docker.io/library/redis:8
+    restart: unless-stopped
+    user: 1030:65539
+    volumes:
+      - /volume1/docker/paperlessngx/redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+    environment:
+      TZ: Europe/Warsaw
+  db:
+    image: docker.io/library/postgres:17
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "paperless", "-U", "paperlessuser"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    volumes:
+      - /volume1/docker/paperlessngx/db:/var/lib/postgresql/data
+    env_file: stack.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+      tika:
+        condition: service_started
+      gotenberg:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    ports:
+      - "8888:8000"
+    volumes:
+      - /volume1/docker/paperlessngx/data:/usr/src/paperless/data
+      - /volume1/docker/paperlessngx/media:/usr/src/paperless/media
+      - /volume1/docker/paperlessngx/export:/usr/src/paperless/export
+      - /volume1/docker/paperlessngx/consume:/usr/src/paperless/consume
+      - /volume1/docker/paperlessngx/trash:/usr/src/paperless/trash
+    env_file: stack.env
+    environment:
+      PAPERLESS_REDIS: ${PAPERLESS_REDIS}
+      PAPERLESS_DBHOST: db
+      PAPERLESS_DBNAME: ${PAPERLESS_DBNAME}
+      PAPERLESS_DBUSER: ${PAPERLESS_DBUSER}
+      PAPERLESS_DBPASS: ${PAPERLESS_DBPASS}
+      PAPERLESS_EMPTY_TRASH_DIR: ../trash
+      PAPERLESS_FILENAME_FORMAT: '{{ created_year }}/{{ correspondent }}/{{ document_type }}/{{ title }}'
+      PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD: 6
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
+      PAPERLESS_OCR_LANGUAGES: pol
+      PAPERLESS_OCR_LANGUAGE: pol
+      PAPERLESS_TIME_ZONE: Europe/Warsaw
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      USERMAP_UID: 1030
+      USERMAP_GID: 65539
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.24
+    restart: unless-stopped
+    user: 1030:65539
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+  tika:
+    image: docker.io/apache/tika:latest
+    restart: unless-stopped
+    user: 1030:65539

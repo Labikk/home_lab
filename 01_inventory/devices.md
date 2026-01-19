@@ -7,7 +7,7 @@
 - RAID: SHR
 - IP: 192.168.1.58
 - Hostname: DS925_plus
-- OS: 
+- OS: DSM 7.3.2-86009
 - Firmware: -
 - S/N: 
 - Location: Living room

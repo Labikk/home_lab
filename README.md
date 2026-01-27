@@ -10,8 +10,18 @@ The repository contains complete homelab documentation: architecture, network to
 5. [Procedures](./04_procedures/)
 
 
-### Tech stack
+## Tech stack
 - Docker
 - Tailscale
 - Synology DSM
 - GIT + Markdown + Mermaid
+
+
+## 🔐 Security & Secrets
+
+This repository does NOT contain any secrets.
+
+- All credentials are stored outside Git
+- Environment variables are documented using `.env.example`
+- Real values are managed via a password manager
+

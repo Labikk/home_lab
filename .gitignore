@@ -1,2 +1,24 @@
 .env
 *.env
+# Secrets
+*.key
+*.pem
+*.pfx
+
+# Backups & dumps
+backup/
+backups/
+*.sql
+*.dump
+
+# Certificates
+certs/
+ssl/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Generated
+*.log

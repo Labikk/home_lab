@@ -69,7 +69,7 @@ services:
       USERMAP_UID: 1030
       USERMAP_GID: 65539
   gotenberg:
-    image: docker.io/gotenberg/gotenberg:8.24
+    image: docker.io/gotenberg/gotenberg:8.27
     restart: unless-stopped
     user: 1030:65539
     command:

@@ -1,6 +1,6 @@
 # Adguard home
 - Hosted on: Synology NAS
-- Version: 0.107.69
+- Version: v0.107.74
 - Exposed port: 3000
 - Managed by: Synology Container Manager
 

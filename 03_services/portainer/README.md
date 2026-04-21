@@ -1,6 +1,6 @@
 # Portainer
 - Hosted on: Synology NAS
-- Version: 2.33.3 LTS
+- Version: 2.39.1 LTS
 - Exposed port: 9000
 - Managed services:
     - Paperless-ngx

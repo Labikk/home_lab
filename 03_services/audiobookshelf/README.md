@@ -1,6 +1,6 @@
 # Audiobookshelf
 - Hosted on: Synology NAS
-- Version: 2.31.0
+- Version: v2.33.2
 - Exposed port: 13378
 - Managed by: Synology Container Manager
 

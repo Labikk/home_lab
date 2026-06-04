@@ -1,5 +1,16 @@
 # Hardware inventory
 
+### GMKTec K6 mini PC proxmox VE
+- Model: GMKTec K6
+- IP: 192.168.1.47
+- Hostname: pve
+- OS: Proxmox VE 9.2.3
+- Firmware:
+- S/N: 
+- Location: bedroom
+- Role: Proxmox VE Hypervisor bare metal
+- Notes: 
+
 ### Synology NAS
 - Model: Synology DS925+
 - RAM: 4 GB

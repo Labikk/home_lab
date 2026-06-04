@@ -29,6 +29,7 @@ The repository is designed to be:
 3. [Hardware inventory](./01_inventory/devices.md)
 4. [Services inventory](./03_services/)
 5. [Procedures](./04_procedures/)
+6. [Solutions] (./-5_solutions/)
 
 ---
 

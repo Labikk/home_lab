@@ -29,7 +29,8 @@ The repository is designed to be:
 3. [Hardware inventory](./01_inventory/devices.md)
 4. [Services inventory](./03_services/)
 5. [Procedures](./04_procedures/)
-6. [Solutions] (./05_solutions/)
+6. [Solutions](./05_solutions/)
+7. [Terraform](./06_terraform/)
 
 ---
 
@@ -43,7 +44,9 @@ The repository is designed to be:
 - GIT & github
 - Markdown
 - Mermaid
-- Planned: Proxmox VE, Proxmox Backup Server, Kubernetes
+- Proxmox
+- Terraform
+- Planned: Ansible, Kubernetes, Observability
 
 ---
 

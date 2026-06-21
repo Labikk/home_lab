@@ -1,9 +1,14 @@
+# Environment variables
 .env
 *.env
+
 # Secrets
 *.key
 *.pem
 *.pfx
+
+# Terraform
+*.tfvars
 
 # Backups & dumps
 backup/

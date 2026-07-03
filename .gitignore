@@ -8,7 +8,11 @@
 *.pfx
 
 # Terraform
+**/.terraform/*
 *.tfvars
+*.tfvars.json
+*.tfstate
+*.tfstate.*
 
 # Backups & dumps
 backup/

@@ -10,3 +10,4 @@ services:
       - /volume1/docker/audiobookshelf/metadata:/metadata
     environment:
       - TZ=Europe/Warsaw
+    restart: always
